@@ -11,6 +11,8 @@ class GameScene extends Scene {
   private hpGfx: any;
   private hp: number = 3;
   private maxHP: number = 3;
+  private score: number = 0;
+  private txtScore: any;
 
   constructor() {
     super('scene-game');
@@ -63,6 +65,14 @@ class GameScene extends Scene {
     // HP bar
     this.hpGfx = this.add.graphics();
 
+    // Score
+    this.txtScore = this.add.text(window.innerWidth / 2, 42 + 20, '0', {
+      fontFamily: 'monospace',
+      fontSize: '24px',
+      color: '#FFF'
+    });
+    this.txtScore.setOrigin(0.5, 0);
+
     // Main platform (and screen bounds)
     this.platform = this.add.rectangle(0, window.innerHeight / 2 + 100, window.innerWidth, window.innerHeight / 2, 0xFFFFFF, 1);
     this.platform.setOrigin(0, 0);
@@ -93,6 +103,7 @@ class GameScene extends Scene {
             
             if (p.y < b.y - b.displayHeight * 0.75) {
               p.setVelocityY(-200);
+              this.score++;
             }
             else {
               p.setVelocityY(200);
@@ -102,6 +113,7 @@ class GameScene extends Scene {
               }
               else {
                 this.hp = 3;
+                this.score = 0;
                 this.ost.destroy();
                 this.scene.restart();
               }
@@ -123,7 +135,7 @@ class GameScene extends Scene {
       repeat: -1
     });
 
-    this.cameras.main.setBackgroundColor(0x222233);
+    this.cameras.main.setBackgroundColor(0x333344);
   }
 
   update(time: number, delta: number) {
@@ -160,6 +172,9 @@ class GameScene extends Scene {
     } else {
       this.player.play('player-jump', true);
     }
+
+    // Update score
+    this.txtScore.setText(this.score);
   }
 }
 
