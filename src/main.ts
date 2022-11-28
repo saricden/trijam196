@@ -14,7 +14,7 @@ const config = {
     default: 'arcade',
     arcade: {
       gravity: { y: 600 },
-      debug: false
+      debug: true
     }
   },
   pixelArt: true,
