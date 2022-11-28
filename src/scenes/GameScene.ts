@@ -1,4 +1,4 @@
-import { Scene, GameObjects, Display, Sound, Physics } from "phaser";
+import { Scene, GameObjects, Display, Sound } from "phaser";
 
 class GameScene extends Scene {
   private baddy!: any;
@@ -53,11 +53,24 @@ class GameScene extends Scene {
       key:'up'
     });
 
+    const gfx = this.add.graphics();
+    gfx.lineStyle(2, 0xFF0000, 1);
+    gfx.lineBetween(0, 0, 300, 300);
+
     // Main platform (and screen bounds)
     this.platform = this.add.rectangle(0, window.innerHeight / 2 + 100, window.innerWidth, window.innerHeight / 2, 0xFFFFFF, 1);
     this.platform.setOrigin(0, 0);
 
     this.physics.world.setBounds(0, 0, window.innerWidth, window.innerHeight / 2 + 100);
+
+    // Start spawn clock
+    this.time.addEvent({
+      callback: () => {
+        console.log('spawn');
+      },
+      delay: 1000,
+      repeat: -1
+    });
   }
 
   update(time: number, delta: number) {
@@ -65,7 +78,7 @@ class GameScene extends Scene {
     // Sync baddy + static tile positioning
     this.staticTile.setPosition(this.baddy.x, this.baddy.y);
 
-    // Player jumpig
+    // Player jumping
     if (this.cursors.up.isDown && this.player.body.blocked.down) {
       this.player.body.setVelocityY(-600);
     }
