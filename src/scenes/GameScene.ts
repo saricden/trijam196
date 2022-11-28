@@ -57,10 +57,10 @@ class GameScene extends Scene {
     // Line logic for enemy attack
     const gfx = this.add.graphics();
     function spawnLine(): any {
-      let x = pMath.Between(100, 400);
-      let y = pMath.Between(200, 100);
+      let x = pMath.Between(window.innerWidth - 256, window.innerWidth -64);
+      let y = pMath.Between(64, window.innerHeight - 400);
       gfx.lineStyle(2, 0xFF0000, 1);
-      gfx.lineBetween(142, 442, 100, 400);
+      gfx.lineBetween(142, 442, x, y);
       return {x, y};
     }
     spawnLine();
