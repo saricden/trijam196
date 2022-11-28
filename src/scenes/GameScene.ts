@@ -23,8 +23,8 @@ class GameScene extends Scene {
     this.staticTile.setAlpha(0.55);
 
     // Player stuff
-    this.player.setBounce(0.2);
-    this.player.setCollideWorldBounds(true);
+    this.player.body.setBounce(0.2);
+    this.player.body.setCollideWorldBounds(true);
     this.player.body.setGravityY(400);
     
     this.anims.create({
