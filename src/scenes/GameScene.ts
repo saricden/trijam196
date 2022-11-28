@@ -21,7 +21,7 @@ class GameScene extends Scene {
 
     this.textbox.setOrigin(0.5, 0.5);
 
-    console.log('Loading gr8 success');
+    this.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'baddy').setScale(2).play('baddy-run');
   }
 
   update(time: number, delta: number) {

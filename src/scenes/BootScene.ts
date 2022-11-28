@@ -14,6 +14,15 @@ class BootScene extends Scene {
 
   create() {
     // TODO: Create animation for baddy sheet
+    this.anims.create({
+      key: 'baddy-run',
+      frames: this.anims.generateFrameNumbers('baddy', {
+        start: 0,
+        end: 7
+      }),
+      frameRate: 12,
+      repeat: -1
+    });
 
     this.scene.start('scene-game');
   }
