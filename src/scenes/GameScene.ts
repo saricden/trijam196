@@ -45,7 +45,7 @@ class GameScene extends Scene {
     this.player.body.setBounce(0.2);
     this.player.body.setCollideWorldBounds(true);
     this.player.body.setGravityY(400);
-
+    this.player.play('player-run');
 
     // Line logic for enemy attack
     const gfx = this.add.graphics();
@@ -96,7 +96,7 @@ class GameScene extends Scene {
             }
             else {
               p.setVelocityY(200);
-              
+
               if (this.hp - 1 > 0) {
                 this.hp--;
               }

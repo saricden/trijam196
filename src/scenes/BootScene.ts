@@ -16,9 +16,9 @@ class BootScene extends Scene {
       frameHeight: 32
     });
 
-    this.load.spritesheet('player', '/bluedude.png', {
-      frameWidth: 16,
-      frameHeight: 16
+    this.load.spritesheet('player', '/AnimationSheet_Character.png', {
+      frameWidth: 32,
+      frameHeight: 32
     });
 
     this.load.audio('ost-loop', '/ost.mp3');
@@ -44,6 +44,15 @@ class BootScene extends Scene {
       frameRate: 8,
       repeat: -1
     });
+    this.anims.create({
+      key: 'player-run',
+      frames: this.anims.generateFrameNumbers('player', { 
+        start: 24, 
+        end: 32
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
 
     this.scene.start('scene-game');
   }
