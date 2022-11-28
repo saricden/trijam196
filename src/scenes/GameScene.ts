@@ -92,6 +92,8 @@ class GameScene extends Scene {
         const brick = this.physics.add.sprite(x, y, 'static');
         const mass = pMath.FloatBetween(0.25, 0.8);
 
+        this.sound.play('sfx-laser');
+
         brick.play('static-flicker');
         brick.body.setCollideWorldBounds(true);
         brick.body.setVelocityX(-speed);
@@ -101,6 +103,8 @@ class GameScene extends Scene {
 
         this.physics.add.overlap(this.player, brick, (p: any, b: any) => {
           if (!b.getData('wasHit')) {
+            this.sound.play('sfx-ouch');
+            
             b.setData('wasHit', true);
             b.body.setCollideWorldBounds(false);
             b.setAlpha(0.5);

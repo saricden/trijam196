@@ -22,6 +22,8 @@ class BootScene extends Scene {
     });
 
     this.load.audio('ost-loop', '/ost.mp3');
+    this.load.audio('sfx-laser', '/enemy_laser.wav');
+    this.load.audio('sfx-ouch', '/player_hit.wav');
 
     this.load.image('static-bg0', '/static-dots0.png');
     this.load.image('static-bg1', '/static-dots1.png');
