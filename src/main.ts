@@ -17,6 +17,7 @@ const config = {
       // debug: true
     }
   },
+  pixelArt: true,
   scene: [
     BootScene,
     GameScene
