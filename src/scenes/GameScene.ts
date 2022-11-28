@@ -165,6 +165,17 @@ class GameScene extends Scene {
     this.bg3.setOrigin(0, 0);
     this.bg3.setDepth(-1);
     this.bg3.setAlpha(0.4);
+
+    // Pointer jump
+    this.input.on('pointerup', () => {
+      this.jump();
+    });
+  }
+
+  jump() {
+    if (this.player.body.blocked.down) {
+      this.player.body.setVelocityY(-500);
+    }
   }
 
   update(time: number) {
@@ -172,8 +183,8 @@ class GameScene extends Scene {
     this.staticTile.setPosition(this.baddy.x, this.baddy.y);
 
     // Player jumping
-    if (this.cursors.up.isDown && this.player.body.blocked.down) {
-      this.player.body.setVelocityY(-500);
+    if (this.cursors.up.isDown) {
+      this.jump();
     }
 
     // Brick cleanup
