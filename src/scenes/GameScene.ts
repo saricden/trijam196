@@ -26,6 +26,9 @@ class GameScene extends Scene {
   update(time: number, delta: number) {
     return;
   }
+
+  
+
 }
 
 export default GameScene;
