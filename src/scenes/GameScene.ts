@@ -42,17 +42,7 @@ class GameScene extends Scene {
     this.player.body.setBounce(0.2);
     this.player.body.setCollideWorldBounds(true);
     this.player.body.setGravityY(400);
-    
-    this.anims.create({
-      key:'left',
-    });
-    this.anims.create({
-      key:'right',
-    });
-    this.anims.create({
-      key:'up'
-    });
-
+    this.player.play('player-run');
 
     // Line logic for enemy attack
     const gfx = this.add.graphics();
