@@ -22,6 +22,11 @@ class BootScene extends Scene {
     });
 
     this.load.audio('ost-loop', '/ost.mp3');
+
+    this.load.image('static-bg0', '/static-dots0.png');
+    this.load.image('static-bg1', '/static-dots1.png');
+    this.load.image('static-bg2', '/static-dots2.png');
+    this.load.image('static-bg3', '/static-dots3.png');
   }
 
   create() {

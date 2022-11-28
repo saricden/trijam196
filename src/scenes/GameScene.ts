@@ -13,6 +13,10 @@ class GameScene extends Scene {
   private maxHP: number = 3;
   private score: number = 0;
   private txtScore: any;
+  private bg0: any;
+  private bg1: any;
+  private bg2: any;
+  private bg3: any;
 
   constructor() {
     super('scene-game');
@@ -136,10 +140,34 @@ class GameScene extends Scene {
     });
 
     this.cameras.main.setBackgroundColor(0x333344);
+
+    // Parallax BG
+    this.bg0 = this.add.tileSprite(0, 0, window.innerWidth / 2, window.innerHeight / 2, 'static-bg0');
+    this.bg0.setScale(2);
+    this.bg0.setOrigin(0, 0);
+    this.bg0.setDepth(-4);
+    this.bg0.setAlpha(0.1);
+
+    this.bg1 = this.add.tileSprite(0, 0, window.innerWidth / 2, window.innerHeight / 2, 'static-bg1');
+    this.bg1.setScale(2);
+    this.bg1.setOrigin(0, 0);
+    this.bg1.setDepth(-3);
+    this.bg1.setAlpha(0.2);
+
+    this.bg2 = this.add.tileSprite(0, 0, window.innerWidth / 2, window.innerHeight / 2, 'static-bg2');
+    this.bg2.setScale(2);
+    this.bg2.setOrigin(0, 0);
+    this.bg2.setDepth(-2);
+    this.bg2.setAlpha(0.3);
+  
+    this.bg3 = this.add.tileSprite(0, 0, window.innerWidth / 2, window.innerHeight / 2, 'static-bg3');
+    this.bg3.setScale(2);
+    this.bg3.setOrigin(0, 0);
+    this.bg3.setDepth(-1);
+    this.bg3.setAlpha(0.4);
   }
 
-  update() {
-    
+  update(time: number) {
     // Sync baddy + static tile positioning
     this.staticTile.setPosition(this.baddy.x, this.baddy.y);
 
@@ -175,6 +203,12 @@ class GameScene extends Scene {
 
     // Update score
     this.txtScore.setText(this.score);
+
+    // Parallax fx
+    this.bg0.tilePositionX = time * 0.02;
+    this.bg1.tilePositionX = time * 0.04;
+    this.bg2.tilePositionX = time * 0.08;
+    this.bg3.tilePositionX = time * 0.16;
   }
 }
 
