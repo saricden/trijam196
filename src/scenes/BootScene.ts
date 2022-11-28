@@ -15,6 +15,8 @@ class BootScene extends Scene {
       frameWidth: 32,
       frameHeight: 32
     });
+
+    this.load.audio('ost-loop', '/ost.mp3');
   }
 
   create() {
