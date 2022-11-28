@@ -79,7 +79,11 @@ class GameScene extends Scene {
     // Player jumping
     if (this.cursors.up.isDown && this.player.body.blocked.down) {
       this.player.body.setVelocityY(-600);
-      this.player.play('player-jump');
+    }
+    if (this.player.body.blocked.down) {
+      this.player.play('player-run', true);
+    } else {
+      this.player.play('player-jump', true);
     }
   }
 }
