@@ -1,18 +1,21 @@
 import { Scene, GameObjects, Display, Sound } from "phaser";
+import { moveMessagePortToContext } from "worker_threads";
 
 class GameScene extends Scene {
   private baddy!: GameObjects.Sprite;
   private staticTile!: GameObjects.Sprite;
   private ost!: Sound.BaseSound;
   private player!: any;
+  private cursors!: any;
 
   constructor() {
     super('scene-game');
   }
 
   create() {
+    this.cursors = this.input.keyboard.createCursorKeys();
     this.baddy = this.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'baddy');
-    this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'bluedude');
+    this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'player');
     this.baddy.play('baddy-run');
 
     // Baddy data
@@ -31,19 +34,17 @@ class GameScene extends Scene {
     this.ost.play();
     
     // Player stuff
-    this.player.body.setBounce(0.2);
     this.player.body.setCollideWorldBounds(true);
-    this.player.body.setGravityY(400);
-    
-    this.anims.create({
-      key:'left',
-    })
-    this.anims.create({
-      key:'right',
-    })
-    this.anims.create({
-      key:'up'
-    })
+
+    if (this.cursors.left.down) {
+      this.player.setVelocityX(100);
+    }
+    if (this.cursors.right.down) {
+      this.player.setVelocityX(100);
+    }
+    if (this.cursors.up.down) {
+      this.player.setVelocityY(-100);
+    }
 
     // Camera controls
     this.cameras.main.setZoom(2);
@@ -52,9 +53,6 @@ class GameScene extends Scene {
   update(time: number, delta: number) {
     return;
   }
-
-
-
 }
 
 export default GameScene;
