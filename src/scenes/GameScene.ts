@@ -6,15 +6,16 @@ class GameScene extends Scene {
   private ost!: Sound.BaseSound;
   private player!: any;
   private platform!: GameObjects.Rectangle;
+  private cursors!: any;
 
   constructor() {
     super('scene-game');
   }
 
   create() {
-    this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'bluedude');
-
+    this.cursors = this.input.keyboard.createCursorKeys();
     this.baddy = this.physics.add.sprite(100, window.innerHeight / 2, 'baddy');
+    this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'player');
     this.baddy.play('baddy-run');
     this.baddy.setScale(2);
     this.baddy.body.setCollideWorldBounds(true);
@@ -63,10 +64,12 @@ class GameScene extends Scene {
     
     // Sync baddy + static tile positioning
     this.staticTile.setPosition(this.baddy.x, this.baddy.y);
+
+    // Player jumpig
+    if (this.cursors.up.isDown && this.player.body.blocked.down) {
+      this.player.body.setVelocityY(-600);
+    }
   }
-
-
-
 }
 
 export default GameScene;
