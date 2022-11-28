@@ -43,9 +43,17 @@ class GameScene extends Scene {
     this.player.body.setCollideWorldBounds(true);
     this.player.body.setGravityY(400);
 
+
+    // Line logic for enemy attack
     const gfx = this.add.graphics();
-    gfx.lineStyle(2, 0xFF0000, 1);
-    gfx.lineBetween(0, 0, 300, 300);
+    function spawnLine(): any {
+      let x = pMath.Between(window.innerWidth - 256, window.innerWidth -64);
+      let y = pMath.Between(64, window.innerHeight - 400);
+      gfx.lineStyle(2, 0xFF0000, 1);
+      gfx.lineBetween(142, 442, x, y);
+      return {x, y};
+    }
+    spawnLine();
 
     // Main platform (and screen bounds)
     this.platform = this.add.rectangle(0, window.innerHeight / 2 + 100, window.innerWidth, window.innerHeight / 2, 0xFFFFFF, 1);
