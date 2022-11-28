@@ -26,6 +26,7 @@ class GameScene extends Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.baddy = this.physics.add.sprite(100, window.innerHeight / 2, 'baddy');
     this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'player');
+    this.player.body.setSize(20, 28)
     this.baddy.play('baddy-run');
     this.baddy.setScale(2);
     this.baddy.body.setCollideWorldBounds(true);
