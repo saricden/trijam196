@@ -8,6 +8,9 @@ class GameScene extends Scene {
   private platform!: GameObjects.Rectangle;
   private cursors!: any;
   private activeBricks: any[] = [];
+  private hpGfx: any;
+  private hp: number = 3;
+  private maxHP: number = 3;
 
   constructor() {
     super('scene-game');
@@ -57,6 +60,9 @@ class GameScene extends Scene {
       return {x, y};
     }
 
+    // HP bar
+    this.hpGfx = this.add.graphics();
+
     // Main platform (and screen bounds)
     this.platform = this.add.rectangle(0, window.innerHeight / 2 + 100, window.innerWidth, window.innerHeight / 2, 0xFFFFFF, 1);
     this.platform.setOrigin(0, 0);
@@ -77,12 +83,28 @@ class GameScene extends Scene {
         brick.body.setVelocityX(-speed);
         brick.body.setBounce(mass, mass);
         brick.setScale(1, 0.9 + (mass * 2));
+        brick.setData('wasHit', false);
 
         this.physics.add.overlap(this.player, brick, (p: any, b: any) => {
-          if (p.y < b.y + b.displayHeight * 0.33) {
+          if (!b.getData('wasHit')) {
+            b.setData('wasHit', true);
             b.body.setCollideWorldBounds(false);
             b.setAlpha(0.5);
-            p.setVelocityY(-200);
+            
+            if (p.y < b.y - b.displayHeight * 0.75) {
+              p.setVelocityY(-200);
+            }
+            else {
+              p.setVelocityY(200);
+              
+              if (this.hp - 1 > 0) {
+                this.hp--;
+              }
+              else {
+                this.hp = 0;
+                alert('Game OVER');
+              }
+            }
           }
         });
 
@@ -121,6 +143,14 @@ class GameScene extends Scene {
         this.activeBricks.splice(i, 1);
       }
     });
+
+    // Render HP bar
+    this.hpGfx.clear();
+    this.hpGfx.lineStyle(2, 0xFFFFFF, 1);
+    this.hpGfx.fillStyle(0xFFFFFF, 1);
+
+    this.hpGfx.strokeRect(20, 20, window.innerWidth - 40, 20);
+    this.hpGfx.fillRect(20, 20, ((window.innerWidth - 40) * this.hp / this.maxHP), 20);
   }
 }
 
