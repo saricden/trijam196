@@ -151,6 +151,12 @@ class GameScene extends Scene {
 
     this.hpGfx.strokeRect(20, 20, window.innerWidth - 40, 20);
     this.hpGfx.fillRect(20, 20, ((window.innerWidth - 40) * this.hp / this.maxHP), 20);
+    
+    if (this.player.body.blocked.down) {
+      this.player.play('player-run', true);
+    } else {
+      this.player.play('player-jump', true);
+    }
   }
 }
 

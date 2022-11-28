@@ -48,10 +48,17 @@ class BootScene extends Scene {
       key: 'player-run',
       frames: this.anims.generateFrameNumbers('player', { 
         start: 24, 
-        end: 32
+        end: 33
       }),
       frameRate: 12,
       repeat: -1
+    })
+    this.anims.create({
+      key: 'player-jump',
+      frames: this.anims.generateFrameNames('player', {
+        start: 41,
+        end: 48
+      })
     })
 
     this.scene.start('scene-game');
