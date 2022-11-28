@@ -36,22 +36,25 @@ class GameScene extends Scene {
     // Player stuff
     this.player.body.setCollideWorldBounds(true);
 
-    if (this.cursors.left.down) {
-      this.player.setVelocityX(100);
-    }
-    if (this.cursors.right.down) {
-      this.player.setVelocityX(100);
-    }
-    if (this.cursors.up.down) {
-      this.player.setVelocityY(-100);
-    }
-
     // Camera controls
     this.cameras.main.setZoom(2);
   }
 
   update(time: number, delta: number) {
-    return;
+
+    // Player movement
+    if (this.cursors.left.down) {
+      this.player.body.setVelocityX(-100);
+    }
+    else if (this.cursors.right.down) {
+      this.player.body.setVelocityX(100);
+    }
+    else if (this.cursors.up.down) {
+      this.player.body.setVelocityY(-100);
+    }
+    else {
+      this.player.body.setVelocityX(0);
+    }
   }
 }
 
