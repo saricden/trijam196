@@ -4,6 +4,7 @@ class GameScene extends Scene {
   private baddy!: GameObjects.Sprite;
   private staticTile!: GameObjects.Sprite;
   private ost!: Sound.BaseSound;
+  private player!: any;
 
   constructor() {
     super('scene-game');
@@ -11,8 +12,10 @@ class GameScene extends Scene {
 
   create() {
     this.baddy = this.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'baddy');
+    this.player = this.physics.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'bluedude');
     this.baddy.play('baddy-run');
 
+    // Baddy data
     this.staticTile = this.add.sprite(this.baddy.x + 5, this.baddy.y, 'static');
     this.staticTile.play('static-flicker');
     this.staticTile.setScale(1.5, 1.25);
@@ -26,6 +29,21 @@ class GameScene extends Scene {
       volume: 0.7
     });
     this.ost.play();
+    
+    // Player stuff
+    this.player.body.setBounce(0.2);
+    this.player.body.setCollideWorldBounds(true);
+    this.player.body.setGravityY(400);
+    
+    this.anims.create({
+      key:'left',
+    })
+    this.anims.create({
+      key:'right',
+    })
+    this.anims.create({
+      key:'up'
+    })
 
     // Camera controls
     this.cameras.main.setZoom(2);
@@ -34,6 +52,9 @@ class GameScene extends Scene {
   update(time: number, delta: number) {
     return;
   }
+
+
+
 }
 
 export default GameScene;
