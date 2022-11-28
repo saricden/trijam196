@@ -46,14 +46,16 @@ class GameScene extends Scene {
 
     // Line logic for enemy attack
     const gfx = this.add.graphics();
+
     function spawnLine(): any {
       let x = pMath.Between(window.innerWidth - 256, window.innerWidth -64);
       let y = pMath.Between(64, window.innerHeight - 400);
+      gfx.setAlpha(1);
+      gfx.clear();
       gfx.lineStyle(2, 0xFF0000, 1);
-      gfx.lineBetween(142, 442, x, y);
+      gfx.lineBetween(142, 492, x, y);
       return {x, y};
     }
-    spawnLine();
 
     // Main platform (and screen bounds)
     this.platform = this.add.rectangle(0, window.innerHeight / 2 + 100, window.innerWidth, window.innerHeight / 2, 0xFFFFFF, 1);
@@ -66,8 +68,8 @@ class GameScene extends Scene {
 
     this.time.addEvent({
       callback: () => {
-        const x = this.player.x + 300;
-        const brick = this.physics.add.sprite(x, window.innerHeight / 2 - 100, 'static');
+        const {x, y} = spawnLine();
+        const brick = this.physics.add.sprite(x, y, 'static');
         const mass = pMath.FloatBetween(0.25, 0.8);
 
         brick.play('static-flicker');
@@ -85,6 +87,12 @@ class GameScene extends Scene {
         });
 
         this.activeBricks.push(brick);
+
+        this.tweens.add({
+          targets: gfx,
+          alpha: 0,
+          duration: 500
+        });
 
         speed *= 1.05;
       },
