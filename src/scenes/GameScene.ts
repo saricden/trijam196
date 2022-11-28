@@ -101,8 +101,9 @@ class GameScene extends Scene {
                 this.hp--;
               }
               else {
-                this.hp = 0;
-                alert('Game OVER');
+                this.hp = 3;
+                this.ost.destroy();
+                this.scene.restart();
               }
             }
           }
@@ -121,6 +122,8 @@ class GameScene extends Scene {
       delay: 4000,
       repeat: -1
     });
+
+    this.cameras.main.setBackgroundColor(0x222233);
   }
 
   update(time: number, delta: number) {
@@ -151,7 +154,7 @@ class GameScene extends Scene {
 
     this.hpGfx.strokeRect(20, 20, window.innerWidth - 40, 20);
     this.hpGfx.fillRect(20, 20, ((window.innerWidth - 40) * this.hp / this.maxHP), 20);
-    
+
     if (this.player.body.blocked.down) {
       this.player.play('player-run', true);
     } else {
