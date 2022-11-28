@@ -138,7 +138,7 @@ class GameScene extends Scene {
     this.cameras.main.setBackgroundColor(0x333344);
   }
 
-  update(time: number, delta: number) {
+  update() {
     
     // Sync baddy + static tile positioning
     this.staticTile.setPosition(this.baddy.x, this.baddy.y);
