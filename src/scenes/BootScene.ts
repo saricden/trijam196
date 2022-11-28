@@ -10,10 +10,14 @@ class BootScene extends Scene {
       frameWidth: 150,
       frameHeight: 150
     });
+
+    this.load.spritesheet('static', '/static-sheet.png', {
+      frameWidth: 32,
+      frameHeight: 32
+    });
   }
 
   create() {
-    // TODO: Create animation for baddy sheet
     this.anims.create({
       key: 'baddy-run',
       frames: this.anims.generateFrameNumbers('baddy', {
@@ -21,6 +25,16 @@ class BootScene extends Scene {
         end: 7
       }),
       frameRate: 12,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'static-flicker',
+      frames: this.anims.generateFrameNumbers('static', {
+        start: 0,
+        end: 3
+      }),
+      frameRate: 8,
       repeat: -1
     });
 

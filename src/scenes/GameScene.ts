@@ -22,6 +22,8 @@ class GameScene extends Scene {
     this.textbox.setOrigin(0.5, 0.5);
 
     this.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'baddy').setScale(2).play('baddy-run');
+
+    this.add.sprite(window.innerWidth / 2 - 100, window.innerHeight / 2, 'static').setScale(2).play('static-flicker');
   }
 
   update(time: number, delta: number) {
