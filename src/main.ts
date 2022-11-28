@@ -1,38 +1,9 @@
 import './style.css'
-import { Scene, Game, WEBGL, GameObjects } from 'phaser';
+import { Game, WEBGL } from 'phaser';
+import BootScene from './scenes/BootScene';
+import GameScene from './scenes/GameScene';
 
 const canvas = document.getElementById('game') as HTMLCanvasElement;
-
-class GameScene extends Scene {
-  private textbox: GameObjects.Text | undefined;
-
-  constructor() {
-    super('scene-game');
-  }
-
-  create() {
-    this.textbox = this.add.text(
-      window.innerWidth / 2,
-      window.innerHeight / 2,
-      'Welcome to Phaser x Vite!',
-      {
-        color: '#FFF',
-        fontFamily: 'monospace',
-        fontSize: '26px'
-      }
-    );
-
-    this.textbox.setOrigin(0.5, 0.5);
-  }
-
-  update(time: number, delta: number) {
-    if (!this.textbox) {
-      return;
-    }
-
-    this.textbox.rotation += 0.0005 * delta;
-  }
-}
 
 const config = {
   type: WEBGL,
@@ -47,6 +18,7 @@ const config = {
     }
   },
   scene: [
+    BootScene,
     GameScene
   ]
 }
