@@ -1,37 +1,30 @@
-import { Scene, GameObjects } from "phaser";
+import { Scene, GameObjects, Display } from "phaser";
 
 class GameScene extends Scene {
-  private textbox: GameObjects.Text | undefined;
+  private baddy!: GameObjects.Sprite;
+  private staticTile!: GameObjects.Sprite;
 
   constructor() {
     super('scene-game');
   }
 
   create() {
-    this.textbox = this.add.text(
-      window.innerWidth / 2,
-      window.innerHeight / 2,
-      'Welcome to Phaser x Vite!',
-      {
-        color: '#FFF',
-        fontFamily: 'monospace',
-        fontSize: '26px'
-      }
-    );
+    this.baddy = this.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'baddy');
+    this.baddy.play('baddy-run');
 
-    this.textbox.setOrigin(0.5, 0.5);
+    this.staticTile = this.add.sprite(this.baddy.x + 5, this.baddy.y, 'static');
+    this.staticTile.play('static-flicker');
+    this.staticTile.setScale(1.5, 1.25);
 
-    this.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'baddy').setScale(2).play('baddy-run');
+    this.staticTile.mask = new Display.Masks.BitmapMask(this, this.baddy);
+    this.staticTile.setAlpha(0.55);
 
-    this.add.sprite(window.innerWidth / 2 - 100, window.innerHeight / 2, 'static').setScale(2).play('static-flicker');
+    // Camera controls
+    this.cameras.main.setZoom(2);
   }
 
   update(time: number, delta: number) {
-    if (!this.textbox) {
-      return;
-    }
-
-    this.textbox.rotation += 0.0005 * delta;
+    return;
   }
 }
 
