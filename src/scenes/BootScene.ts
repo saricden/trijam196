@@ -16,6 +16,11 @@ class BootScene extends Scene {
       frameHeight: 32
     });
 
+    this.load.spritesheet('player', '/bluedude.png', {
+      frameWidth: 16,
+      frameHeight: 16
+    });
+
     this.load.audio('ost-loop', '/ost.mp3');
   }
 
